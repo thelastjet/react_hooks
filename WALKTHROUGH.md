@@ -1,4 +1,4 @@
-# React Hooks
+# React Hooks Exercise Walkthrough
 
 ## Getting Started
 
@@ -31,7 +31,7 @@
    import React from "react";
    import Task from "./Task";
 
-   const Overview = ({ tasks, handleTaskDoneToggle, handleResetTaskList }) => {
+   const Overview = ({ tasks, handleTaskDoneToggle }) => {
    return (
        <section>
        <h3>Tasks</h3>
@@ -89,26 +89,85 @@
 
 2. With the intended functionality explained, it’s your turn to implement this React app (again). You can do it.
 
-    - Our `Overview.jsx` and `Task.jsx` components are functional components that return jsx, but they do not handle the action or state of our application.
-    - Let's focus on our `App.jsx` to finish the functionality
-    - Make sure that you have **react**, **Overview**, and your **App.css** files imported
-    - Strip the class component bare and convert it to a functional component so that we may use hooks
+   - Our `Overview.jsx` and `Task.jsx` components are functional components that return jsx, but they do not handle the action or state of our application.
+   - Let's focus on our `App.jsx` to finish the functionality
+   - Make sure that you have **react**, **Overview**, and your **App.css** files imported
+   - Strip the class component bare and convert it to a functional component so that we may use hooks
 
-    ```
-    const App = () => {
-        return (
-            ...
-        );
-    };
+   ```
+   const App = () => {
+       return (
+           ...
+       );
+   };
 
-    export default App;
-    ```
+   export default App;
+   ```
 
-    
+   - Use the state hook to initialize state for tasks and for id
+   - We'll initialize the tasks state as an array with a default task object
+   - We'll initialize the id state as a number with a default of 2
+
+   ```
+   const [tasks, setTasks] = React.useState([
+   {
+     task: "Work on app",
+     id: 1,
+     done: true,
+   },
+   ]);
+   const [id, setId] = React.useState(2);
+   ```
+
+   - Next, create two functions for adding and updating tasks.
+   - The function for adding tasks should
+     - select the value from the task input element,
+     - create a new task array that is assigned an object with the task, id, and done values,
+     - set the task state to tasks.concat(newTask)
+     - set the id state to id + 1
+
+   ```
+    function addTask() {
+    let newTask = document.getElementById("taskInput").value;
+    let newTaskArr = [{ task: newTask, id, done: false }];
+    setId(id + 1);
+    setTasks(tasks.concat(newTaskArr));
+    document.getElementById("taskInput").value = "";
+   }
+   ```
+
+   - The function for updating tasks should
+     - take in a task id as a parameter
+     - map through the tasks array,
+     - select the task with the same id as the parameter passed in and mark done as **true**,
+     - set the task state to the new tasks array
+
+   ```
+
+   function handleTaskDoneToggle(taskId) {
+   let newTask = tasks.map((task) => {
+   if (task.id == taskId) {
+   task.done = true;
+   }
+   return task;
+   });
+   setTasks(newTask);
+   }
+   ```
+
+   - Add the **Overview** component to the return statement of App.jsx, and add props Tasks and handleTaskDoneToggle
+
+   ```
+    <section>
+        <Overview tasks={tasks} handleTaskDoneToggle={handleTaskDoneToggle} />
+    </section>
+   ```
+
+   - Make sure to have an input element and **add** button for users to add new tasks to the list
 
 3. After you get the functionality working, style the app. Practice, practice, practice.
 
-- REMEMBER: Use the JavaScript function `map` to map over your tasks array. You will need to provide a `unique key` to each item (read the warning, you’ll know it when you see it in the console!). And there is a difference between handling input fields in plain JavaScript and in React. Give a whirl and stretch yourself, but fear not, we will again provide an overview of our solution below.
+REMEMBER: Use the JavaScript function `map` to map over your tasks array. You will need to provide a `unique key` to each item (read the warning, you’ll know it when you see it in the console!). And there is a difference between handling input fields in plain JavaScript and in React. Give a whirl and stretch yourself, but fear not, we will again provide an overview of our solution below.
 
 ### BONUS
 

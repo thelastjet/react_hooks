@@ -2,7 +2,7 @@ import React from "react";
 import Overview from "./components/Overview";
 import "./App.css";
 
-function App() {
+const App = () => {
   const [tasks, setTasks] = React.useState([
     {
       task: "Work on app",
@@ -11,6 +11,11 @@ function App() {
     },
   ]);
   const [id, setId] = React.useState(2);
+
+  React.useEffect(() => {
+    console.log("App - Effect Hook");
+    console.log(tasks);
+  });
 
   function addTask() {
     let newTask = document.getElementById("taskInput").value;
@@ -29,11 +34,6 @@ function App() {
     });
     setTasks(newTask);
   }
-
-  React.useEffect(() => {
-    console.log("App - Effect Hook");
-    console.log(tasks);
-  });
 
   return (
     <main>
@@ -54,22 +54,10 @@ function App() {
       </section>
       <hr />
       <section>
-        {tasks.length > 0 ? (
-          <ol className="list-group">
-            {tasks.map((t, i) => {
-              return (
-                <React.Fragment key={i + ""}>
-                  <Overview task={t} updateTask={updateTask} />
-                </React.Fragment>
-              );
-            })}
-          </ol>
-        ) : (
-          <p>Add a task!</p>
-        )}
+        <Overview tasks={tasks} updateTask={updateTask} />
       </section>
     </main>
   );
-}
+};
 
 export default App;
