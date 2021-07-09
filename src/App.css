@@ -1,1 +1,22 @@
 /* Add custom styling here */
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    margin-left: 5px;
+}
+
+button {
+    margin-left: 5px;
+    width: fit-content;
+}
+
+body {
+    background-color: aquamarine;
+}
+
+
+
