@@ -1,8 +1,14 @@
 /* Add custom styling here */
+h1 {
+    text-align: center;
+}
+
 form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0 auto;
+    width: fit-content;
+    padding: 10px;
+    border: rgb(0, 0, 0) 2px solid;
+    background-color: rgb(93, 92, 92);
 }
 
 input {
@@ -11,12 +17,47 @@ input {
 
 button {
     margin-left: 5px;
+    background-color: red;
     width: fit-content;
 }
 
 body {
-    background-color: aquamarine;
+    background-color: rgb(132, 141, 219);
 }
 
+ul {
+    margin: 5px;
+}
 
+section {
+    text-align: center;
+}
+section > ul {
+    display: inline-block;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#checkbox {
+    margin-left: 5px;
+}
+
+hr {
+    border-color: black;
+    align-items: center;
+}
+
+.parent-container {
+    display: flex;
+}
+
+.child {
+    flex: 1;
+    margin-right: 80px;
+    padding: 30px;
+}
+
+.child:first-child {
+    margin-right: 10px;
+}
 

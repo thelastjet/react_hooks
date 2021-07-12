@@ -1,22 +1,20 @@
 import React from "react";
 import "./App.css";
+import Overview from "./components/Overview";
 
 const App = () => {
   const [tasks, setTasks] = React.useState([]);
-  const [input, setInput] = React.useState("");
-  
-
-  const handleInput = (e) => {
-    setInput(e.target.value);
-  }
 
   const handleClick = (e) => {
     e.preventDefault();
     let input = document.querySelector("#input").value;
-    let newList = [...tasks, input];
-    setTasks(newList);
+    let newTaskList = [...tasks, input];
+    setTasks(newTaskList);
   }
+
   console.log(tasks);
+
+  let todoListImage = require('./images/todolist.jpg')
     
   React.useEffect(() => {
     console.log("App - Effect Hook");
@@ -26,30 +24,28 @@ const App = () => {
   },[]);
 
   return (
-    <main
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-        textAlign: "center",
-      }}
-    >
-      <h1>My To Do List</h1>  
+    <main>
+      <h1>To Do List</h1>
+      <hr />
       <form action="">
-        <label htmlFor="input">Enter task here:</label>
         <input 
           type="text"
           name="input"
           id="input"
-          placeholder="Enter tasks here:"
+          placeholder="Enter task here"
+          autoFocus
         />
         <button onClick={handleClick}>Add Task to List</button>
       </form>
-      <ul>
-        {tasks.map((input, idx) => (
-          <li key={idx}>{input}</li>
-        ))}
-      </ul>
+      <hr />
+      <div className="parent-container">
+        <div className="child">
+          <img src={todoListImage.default} />
+        </div>
+        <div className="child">
+          <Overview tasks={tasks}/>
+        </div>
+      </div> 
     </main>
   );
 }

@@ -1,31 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-function Tasks () {
-    const [tasks, setTasks] = useState([]);
-    const [text, setText] = useState("");
-    
-
-    const handleClick = (e) => {
-        setText(e.target.value);
-        setTasks(tasks => [...tasks, text])
-    }
-    
-    useEffect(() => {
-        console.log("App - Effect Hook");
-        return function cleanup() {
-            console.log("App - Cleanup");
-        }
-    },[]);
+const Overview = ({ tasks }) => {
 
     return (
         <React.Fragment>
-            <input 
-            type="text"
-            placeholder="Enter tasks here:"
-            />
-            <button onClick={handleClick}>Submit Tasks</button>
+            <h1 id="taskHeading">Tasks:</h1>
+            
+            <section>
+                <ul>
+                    {tasks.map((input, idx) => {
+                    return (
+                        <div id="taskList">  
+                            <li className="listItem" key={idx}>{input}<input id="checkbox" type="checkbox" /></li>
+                            <hr />
+                        </div>
+                    );
+                    })}     
+                </ul>
+            </section>
         </React.Fragment>
-    )
-}
+    );
+};
 
-export default Tasks;
+export default Overview;
